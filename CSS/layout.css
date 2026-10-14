@@ -1,0 +1,47 @@
+/* Fundo branco contínuo e seções de marca separadas por respiros. */
+:root { --nav-height: 95px; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 16px); }
+body, main { background: #ffffff; }
+.services, .reviews, .process, .faq { background: #ffffff; background-image: none; }
+.services .section-name, .services h2, .services .section-heading > p { color: var(--ink); }
+.services .section-description { color: var(--muted); }
+.services h2 em { color: var(--blue); }
+.about, .contact, .final-cta {
+  margin: 40px 24px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 0;
+}
+.about > .container, .contact > .container, .final-cta > .container {
+  width: min(var(--max), calc(100% - 48px));
+}
+.services { padding-bottom: 60px; }
+.reviews { padding-top: 75px; }
+.process { padding-top: 0; padding-bottom: 60px; }
+.process > .container { border-top: 1px solid var(--line); padding-top: 60px; }
+.faq { padding-top: 35px; padding-bottom: 65px; }
+.faq > .container { border-top: 1px solid var(--line); padding-top: 60px; }
+.final-cta { margin-top: 10px; margin-bottom: 55px; }
+main section:focus { outline: none; }
+@media (max-width: 800px) {
+  :root { --nav-height: 77px; }
+  .about, .contact, .final-cta { margin: 28px 16px; border-radius: 20px; }
+  .about > .container, .contact > .container, .final-cta > .container { width: calc(100% - 40px); }
+  .services { padding-bottom: 40px; }
+  .reviews { padding-top: 55px; }
+  .process > .container, .faq > .container { padding-top: 45px; }
+  .faq { padding-top: 25px; }
+  .final-cta { margin-bottom: 35px; }
+}
+@media (max-width: 540px) {
+  .about, .contact, .final-cta { margin-inline: 12px; border-radius: 16px; }
+  .about > .container, .contact > .container, .final-cta > .container { width: calc(100% - 32px); }
+  .about, .contact { padding-block: 55px; }
+  .services { padding-top: 60px; }
+  .reviews { padding-top: 45px; }
+  .process { padding-bottom: 35px; }
+  .faq { padding-bottom: 45px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
