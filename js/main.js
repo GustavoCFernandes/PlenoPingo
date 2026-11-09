@@ -3,6 +3,24 @@ const SITE_CONFIG = Object.freeze({ whatsapp: '5511939519727' });
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#navigation');
+
+// Pequena diferença entre os limites evita oscilações ao mudar a altura do menu.
+const pageRoot = document.documentElement;
+let compactNavigation = false;
+let navigationFrame = 0;
+function updateNavigationSize() {
+  navigationFrame = 0;
+  const nextCompact = compactNavigation ? window.scrollY > 16 : window.scrollY > 64;
+  if (nextCompact === compactNavigation) return;
+  compactNavigation = nextCompact;
+  pageRoot.classList.toggle('nav-compact', compactNavigation);
+}
+window.addEventListener('scroll', () => {
+  if (!navigationFrame) navigationFrame = requestAnimationFrame(updateNavigationSize);
+}, { passive: true });
+window.addEventListener('pageshow', updateNavigationSize);
+updateNavigationSize();
+
 function closeMenu() {
   menuToggle.setAttribute('aria-expanded', 'false');
   menuToggle.setAttribute('aria-label', 'Abrir menu');

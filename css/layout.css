@@ -1,5 +1,20 @@
 /* Fundo branco contínuo e seções de marca separadas por respiros. */
-:root { --nav-height: 95px; }
+:root { --nav-expanded-height: 97px; --nav-compact-height: 81px; --nav-height: var(--nav-expanded-height); }
+:root.nav-compact { --nav-height: var(--nav-compact-height); }
+.header { border-bottom: 0; padding-bottom: 3px; }
+.header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background-image: var(--brand-gradient);
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+.header-inner { height: calc(var(--nav-height) - 3px); transition: height .22s ease; }
+.header .brand img { transition: width .22s ease; }
+.nav-compact .header .brand img { width: 205px; }
+.hero { min-height: calc(100svh - var(--nav-expanded-height)); }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 16px); }
 body, main { background: #ffffff; }
 .services, .reviews, .process, .faq { background: #ffffff; background-image: none; }
@@ -24,7 +39,9 @@ body, main { background: #ffffff; }
 .final-cta { margin-top: 10px; margin-bottom: 55px; }
 main section:focus { outline: none; }
 @media (max-width: 800px) {
-  :root { --nav-height: 77px; }
+  :root { --nav-expanded-height: 79px; --nav-compact-height: 69px; }
+  .header nav { top: 100%; }
+  .nav-compact .header .brand img { width: 178px; }
   .about, .contact, .final-cta { margin: 28px 16px; border-radius: 20px; }
   .about > .container, .contact > .container, .final-cta > .container { width: calc(100% - 40px); }
   .services { padding-bottom: 40px; }
@@ -44,4 +61,29 @@ main section:focus { outline: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .header-inner, .header .brand img { transition: none; }
 }
+@media (min-width: 801px) and (max-width: 1100px) {
+  .nav-compact .header .brand img { width: 178px; }
+}
+
+/* Serviços atualizados: estofados, estética automotiva e atendimento corporativo. */
+.service-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.service-card{display:flex;flex-direction:column;min-width:0}
+.service-visual{height:225px;flex-shrink:0}
+.service-body{display:flex;flex-direction:column;flex:1;padding:27px}
+.service-body h3{font-size:24px;line-height:1.15;min-height:56px;padding-right:12px}
+.service-body>p{flex:1;font-size:14px}
+.service-number{right:16px;top:29px}
+.tags{gap:6px;margin-bottom:20px}
+.tags span{padding:5px 9px;line-height:1.4}
+.service-body .service-link{margin-top:auto;min-height:64px;font-size:12px;padding:14px;gap:10px}
+.automotive-scene>img{width:100%;height:100%;object-fit:cover;object-position:center}
+.automotive-scene:after{content:"";position:absolute;inset:50% 0 0;background:linear-gradient(transparent,rgba(0,20,0,.8));pointer-events:none}
+.automotive-scene .visual-note{color:#ffffff;z-index:1}
+.automotive-scene .visual-tag{z-index:1}
+.process h2.section-name{font-size:34px;font-weight:700;line-height:1.05;letter-spacing:.025em;margin-bottom:10px}
+.hero .hero-bottom>span:first-child{max-width:none;display:block}
+@media(max-width:1100px){.service-body{padding:22px}.service-body h3{font-size:22px}.service-visual{height:200px}}
+@media(max-width:950px){.service-grid{grid-template-columns:1fr;max-width:660px;margin-inline:auto}.service-visual{height:280px}.service-body{padding:28px}.service-body h3{font-size:27px;min-height:0}.service-body>p{flex:initial}.service-body .service-link{margin-top:0;min-height:54px}.service-number{right:25px}.process h2.section-name{font-size:29px}}
+@media(max-width:540px){.service-visual{height:235px}.service-body{padding:24px}.service-body h3{font-size:25px}.hero .hero-bottom{gap:12px}.hero .hero-bottom>span:first-child{font-size:11px;line-height:1.5}.process h2.section-name{font-size:27px}}
